@@ -5,24 +5,45 @@ terraform-alicloud-vpc-bastionhost
 
 [English](README.md) | 简体中文
 
-本 Module 用于在阿里云创建 VPC 网络并创建堡垒机。
+本 Module 用于在阿里云创建VPC网络并创建堡垒机。
 
 本 Module 支持创建以下资源：
 
-* [alicloud_vpc](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/vpc)
-* [alicloud_security_group](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/security_group)
-* [alicloud_vswitch](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/vswitch)
 * [alicloud_bastionhost_host](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/bastionhost_host)
 * [alicloud_bastionhost_instance](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/bastionhost_instance)
 
 ## 用法
 
 ```hcl
+data "alicloud_zones" "default" {
+  available_resource_creation = "VSwitch"
+}
+
+resource "alicloud_vpc" "default" {
+  vpc_name   = "TerraformTest"
+  cidr_block = "172.16.0.0/12"
+}
+
+resource "alicloud_security_group" "default" {
+  vpc_id = alicloud_vpc.default.id
+  name   = "TerraformTest"
+}
+
+resource "alicloud_vswitch" "default" {
+  vpc_id     = alicloud_vpc.default.id
+  cidr_block = cidrsubnet(alicloud_vpc.default.cidr_block, 8, 4)
+  zone_id    = data.alicloud_zones.default.zones[0].id
+}
+
+locals {
+  zone_id = data.alicloud_zones.default.ids[length(data.alicloud_zones.default.ids) - 1]
+}
+
 module "example" {
-  source                    = "terraform-alicloud-modules/vpc-bastionhost/alicloud"
-  vpc_name                  = "terraformTestVpcName"
-  vpc_cidr_block            = "terraformTestVpcCidrBlock"
-  vpc_privatelink_bandwidth = "1024"
+  source               = "terraform-alicloud-modules/vpc-bastionhost/alicloud"
+  vswtich_id           = alicloud_vswitch.default.id
+  security_group_ids   = [alicloud_security_group.default.id]
+  bastion_license_code = "bhah_ent_50_asset"
 }
 ```
 
