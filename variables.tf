@@ -4,16 +4,15 @@ variable "name" {
   default     = "TerraformTest"
 }
 
-variable "vpc_name" {
-  description = "The name of the VPC."
+variable "vswtich_id" {
+  description = "Vswtich id."
   type        = string
-  default     = "tf-testAccVpcName"
 }
 
-variable "vpc_cidr_block" {
-  description = "The secondary CIDR blocks for the VPC."
-  type        = string
-  default     = "172.16.0.0/12"
+variable "security_group_ids" {
+  description = "Default name."
+  type        = list(any)
+  default     = []
 }
 
 variable "bastion_license_code" {
