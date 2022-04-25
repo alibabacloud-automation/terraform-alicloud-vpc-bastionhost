@@ -1,26 +1,8 @@
-variable "vswtich_id" {
-  description = "(Deprecated from version 1.1.0) Vswtich id."
-  type        = string
-  default     = ""
-}
-
 #alicloud_bastionhost_instance
-variable "vswitch_id" {
-  description = "VSwitch ID configured to Bastionhost."
-  type        = string
-  default     = ""
-}
-
-variable "security_group_ids" {
-  description = "security group IDs configured to Bastionhost. NOTE: There is a potential diff error because of the order of security_group_ids values indefinite. So, from version 1.160.0, security_group_ids type has been updated as set from list, and you can use tolist to convert it to a list."
-  type        = list(string)
-  default     = []
-}
-
 variable "description" {
   description = "Description of the instance. This name can have a string of 1 to 63 characters."
   type        = string
-  default     = ""
+  default     = "tf-testacc-description"
 }
 
 variable "bastion_license_code" {
@@ -39,13 +21,7 @@ variable "period" {
 variable "name" {
   description = "Specify the new create a host name of the supports up to 128 characters."
   type        = string
-  default     = ""
-}
-
-variable "active_address_type" {
-  description = "The active address type of instance."
-  type        = string
-  default     = "Private"
+  default     = "tf-testacc-name"
 }
 
 variable "host_private_address" {
@@ -58,10 +34,4 @@ variable "os_type" {
   description = "The os type of instance."
   type        = string
   default     = "Linux"
-}
-
-variable "host_source" {
-  description = "The host source of instance."
-  type        = string
-  default     = "Local"
 }
