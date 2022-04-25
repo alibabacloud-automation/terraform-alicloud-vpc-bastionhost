@@ -1,9 +1,9 @@
 resource "alicloud_bastionhost_instance" "default" {
-  description        = var.name
+  vswitch_id         = var.vswitch_id != "" ? var.vswitch_id : var.vswtich_id
+  security_group_ids = var.security_group_ids
+  description        = var.description != "" ? var.description : var.name
   license_code       = var.bastion_license_code
   period             = var.period
-  vswitch_id         = var.vswtich_id
-  security_group_ids = var.security_group_ids
 }
 
 resource "alicloud_bastionhost_host" "default" {
