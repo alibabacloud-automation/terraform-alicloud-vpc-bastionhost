@@ -4,6 +4,9 @@ resource "alicloud_bastionhost_instance" "default" {
   description        = var.description != "" ? var.description : var.name
   license_code       = var.bastion_license_code
   period             = var.period
+  bandwidth          = var.bandwidth
+  storage            = var.storage
+  plan_code          = var.plan_code
 }
 
 resource "alicloud_bastionhost_host" "default" {
