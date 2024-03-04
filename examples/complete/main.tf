@@ -31,6 +31,9 @@ module "example" {
   description          = var.description
   bastion_license_code = var.bastion_license_code
   period               = var.period
+  bandwidth            = var.bandwidth
+  storage              = var.storage
+  plan_code            = var.plan_code
 
   #alicloud_bastionhost_host
   name                 = var.name

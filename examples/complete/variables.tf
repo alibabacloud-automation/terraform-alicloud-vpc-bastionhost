@@ -17,6 +17,24 @@ variable "period" {
   default     = 1
 }
 
+variable "bandwidth" {
+  description = "The bandwidth of Cloud Bastionhost instance. If China-Site Account, its valid values: 0 to 150. Unit: Mbit/s. The value must be a multiple of 5. If International-Site Account, its valid values: 0 to 200. Unit: Mbit/s. The value must be a multiple of 10."
+  type        = string
+  default     = "5"
+}
+
+variable "storage" {
+  description = "The storage of Cloud Bastionhost instance. Valid values: 0 to 500. Unit: TB."
+  type        = string
+  default     = "5"
+}
+
+variable "plan_code" {
+  description = "The plan code of Cloud Bastionhost instance. Valid values: cloudbastion: Basic Edition; cloudbastion_ha: HA Edition."
+  type        = string
+  default     = "cloudbastion"
+}
+
 #alicloud_bastionhost_host
 variable "name" {
   description = "Specify the new create a host name of the supports up to 128 characters."
