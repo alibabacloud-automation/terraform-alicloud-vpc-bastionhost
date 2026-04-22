@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-vpc-bastionhost/compare/v1.1.0...v2.0.0) (2026-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* add provider version constraint for aliyun/alicloud
+
+### Features
+
+* add provider version constraint for aliyun/alicloud ([6b60540](https://github.com/alibabacloud-automation/terraform-alicloud-vpc-bastionhost/commit/6b605401ff09138eeb919b5767385bfcd663d872))
+
 ## 1.2.0 (Unreleased)
 ## 1.1.0 (2024-03-12)
 
